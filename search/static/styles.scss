@@ -1,0 +1,228 @@
+$advanced-button-color: #4d90fe;
+$advanced-highlight-color: #3079ed;
+$advanced-title-color: #d93025;
+$border-highlight-color: rgba(60, 64, 67, 0.25);
+$button-color: #f8f9fa;
+$default-font-color: rgba(0, 0, 0, .87);
+$logo-margin: 10%;
+$search-color: #dfe1e5;
+$main-font: arial, sans-serif;
+$row-width: 45%;
+
+#container {
+    align-content: center;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    margin: $logo-margin auto auto auto
+}
+
+.links {
+    display: flex;
+    justify-content: flex-end;
+
+    .link {
+        color: $default-font-color;    
+        display: inline-block;
+        font-family: $main-font;
+        font-size: 13px;
+        line-height: 24px;
+        padding-right: 16px;
+        text-decoration: none;
+    }
+
+    .link:hover {
+        text-decoration: underline;
+    }
+}
+
+.logo {
+    display: block;
+    margin: $logo-margin auto auto auto;
+}
+
+#logo-container {
+    display: inline-block;
+    position: relative;
+
+    .logo {
+        display: block;
+    }
+
+    .images-text {
+        bottom: 0;
+        color: #4285f4;
+        font-family: $main-font;
+        font-size: 1rem;
+        position: absolute;
+        right: 0;
+        white-space: nowrap;
+    }
+}
+
+%border-highlight {
+    box-shadow: 0px 2px 8px 0px $search-color;
+}
+
+.search {
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+
+    .bar {
+        border: 1px solid $search-color;
+        border-radius: 30px;
+        display: flex;
+        margin: 0 auto;
+        max-width: 575px;
+        overflow: hidden; /* ensure border not exceeded by input field */
+        position: relative; /* to position icon absolutely */
+        width: 90%;
+
+        .search-icon {
+            height: 13px;
+            margin: 15px 0 0 15px;
+            position: absolute;
+            width: 13px;
+        }
+
+        .search-bar {
+            border: none;
+            border-radius: inherit;
+            box-sizing: border-box;
+            font-family: $main-font;
+            font-size: 16px;
+            height: 44px;
+            outline: none;
+            padding: 0 20px 0 40px;
+            width: 100%;
+        }
+    }
+
+    .bar:hover,
+    .bar:focus-within {
+        @extend %border-highlight;
+    }
+    
+    .buttons {
+        display: flex;
+        justify-content: center;
+
+        .button {
+            background-color: $button-color;
+            border: 1px solid $button-color;
+            border-radius: 4px;
+            color: $default-font-color;
+            font-family: $main-font;
+            font-size: 14px;
+            margin: 20px 5px 0 5px;
+            padding: 0 16px;
+            line-height: 27px;
+            height: 36px;
+            min-width: 54px;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .button:hover {
+            border: 1px solid $search-color;
+        }
+    }
+}
+
+.heading {
+    color: $advanced-title-color;
+    font-family: $main-font;
+    font-size: 20px;
+    margin: 0 25px;
+}
+
+.field-container {
+    margin: 40px 25px;
+
+    .field-heading {
+        color: $default-font-color;
+        display: block;
+        font-family: $main-font;
+        font-size: 16px;
+    }
+
+    %advanced-border-highlight {
+        border: 1px solid $advanced-highlight-color;
+    }
+
+    .search-row {
+        align-items: center;
+        display: flex;
+        margin-top: 16px;
+        width: $row-width; /* adopt portion of screen width */
+
+        .search-text {
+            color: $default-font-color;
+            font-family: $main-font;
+            font-size: 13px;
+            line-height: 25px;
+            min-width: 200px;
+            padding-right: 10px;
+            text-align: left;
+            width: 20%; /* adopt portion of parent element width */
+        }
+
+        .search-bar {
+            flex: 1;
+            border-radius: 1px;
+            border: 1px solid $search-color;
+            font-size: 13px;
+            height: 25px;
+            padding: 1px 8px;
+        }
+
+        .search-bar:hover,
+        .search-bar:focus-within {
+            @extend %advanced-border-highlight;
+            outline: none;
+        }
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: flex-end;
+        min-width: 394px;
+        width: $row-width;
+
+        .button {
+            border: none;
+            background-color: $advanced-button-color;
+            color: #fff;
+            cursor: default;
+            font-size: 11px;
+            font-weight: bold;
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+            min-width: 120px;
+            outline: 0;
+            padding: 0 8px;
+        }
+
+        .button:hover {
+            background-color: $advanced-highlight-color;
+        }
+    }
+
+    hr {
+        margin: 30px 0;
+        border: 0;
+        border-top: 1px solid $search-color;
+    }
+}
+
+hr {
+    margin: 30px -20px 20px;
+    border: 0;
+    border-top: 1px solid $search-color;
+}
