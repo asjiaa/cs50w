@@ -19,8 +19,7 @@ def entry(request, entry):
     content = util.get_entry(entry)
     if content == None:
         return render (
-            request,
-            "encyclopedia/error.html", {
+            request, "encyclopedia/error.html", {
                 "entry": entry,
             })
     
@@ -47,7 +46,7 @@ def search(request):
             if not results:
                 return render(request, "encyclopedia/search.html", {
                     "query": query,
-                    "results": entries
+                    "results": results,
                 })
             
             return render(request, "encyclopedia/search.html", {

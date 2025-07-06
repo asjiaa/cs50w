@@ -5,7 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Results for {{ query }}</h1>
+    {% if not results %}
+        <h1>No results for {{ query }}</h1>
+    {% else %}
+        <h1>Results for {{ query }}</h1>
+    {% endif %}
 
     <ul>
         {% for result in results %}
