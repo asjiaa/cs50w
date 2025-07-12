@@ -1,0 +1,128 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <!-- Bid Error -->
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            Your bid must be greater than the current bid.
+        </div>
+    {% endif %}
+
+    <!-- 3 - Close Listing -->
+    {% if user == listing.lister and listing.active %}
+        <form action="{% url 'listing' id=listing.id %}" method="post" class="mb-3">
+            {% csrf_token %}
+            <button type="submit" name="close" class="btn btn-secondary">Close Listing</button>
+        </form>
+    {% elif not listing.active %}
+        <div class="d-flex align-items-center mb-3">
+            <div class="alert alert-danger mb-0 py-1 px-1">
+                Closed
+            </div>
+
+             <!-- 4 - Auction Winner -->
+            {% if user == listing.buyer %}
+                <div class="alert alert-info mb-0 py-1 px-1 ml-2">
+                    Won
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <h2>Listing: {{ listing.title }}</h2>
+
+    <!-- 1 - Add/Remove Watchlist -->
+    {% if user.is_authenticated %}
+        <form action="{% url 'listing' id=listing.id %}" method="post" class="mb-3">
+            {% csrf_token %}
+            {% if user in listing.watchers.all %}
+                <div class="d-flex align-items-center mb-3">
+                    <div class="alert alert-primary mb-0 py-1 px-1">
+                        Watching
+                    </div>
+                    <button type="submit" name="remove" class="btn btn-outline-danger ml-2">Remove</button>
+                </div>
+            {% else %}
+                <button type="submit" name="add" class="btn btn-outline-primary">Watch</button>
+            {% endif %}
+        </form>
+    {% endif %}
+
+    <!-- Specification 4 - Listing Details -->
+    <img src="{{ listing.image }}" alt="No Image" width="500">
+    <hr>
+    <h4>Description</h4>
+    <p class="mb-3">{{listing.description}}</p>
+    <h4>Details</h4>
+    <ul>
+        <li>Listed by: <b>{{ listing.lister }}</b></li>
+        <li>Category: <b>{{ listing.category }}</b></li>
+    </ul>
+    <hr>
+    {% if listing.active %}
+        <h3>${{ listing.price.amount }}</h3>
+        <p>
+            <b>{{ listing.count }}</b> bid(s) so far. 
+            <b>
+                {% if listing.price.user == user %}
+                    Your 
+                {% else %}
+                    {{ listing.price.user }}'s 
+                {% endif %}
+            </b> bid is the current bid.
+        </p>
+    {% else %}
+        {% if listing.buyer %}
+            <div class="alert alert-info" role="alert">
+                Listing sold to 
+                {% if user == listing.buyer %}
+                    <b>you</b> 
+                {% else %}
+                    <b>{{listing.buyer}}</b> 
+                {% endif %}
+                for <b>${{ listing.price.amount }}</b>.
+            </div>
+        {% else %}
+            <div class="alert alert-info" role="alert">
+                Listing was not sold.
+            </div>
+        {% endif %}
+    {% endif %}
+
+    <!-- 2 - Bid Amount -->
+    {% if user.is_authenticated %}
+        {% if listing.active %}
+            <form action="{% url 'listing' id=listing.id %}" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    {{ bid.amount }}
+                </div>
+                <button type="submit" name="bid" class="btn btn-primary mb-3">Place Bid</button>
+            </form>
+        {% endif %}
+    {% endif %}
+
+    <!-- 5 - Add Comment -->
+    <hr>
+    {% if user.is_authenticated %}
+        <form action="{% url 'listing' id=listing.id %}" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ comment.content }}
+            </div>
+            <button type="submit" name="respond" class="btn btn-primary mb-3">Comment</button>
+        </form>
+    {% endif %}
+    <h3>Comments</h3>
+    <hr>
+    {% for comment in comments %}
+        {% if comment.listing == listing %}
+            <p class="ml-3">{{ comment.content }}</p>
+            <p class="text-muted">
+                Posted <b>{{ comment.created }}</b> by <b>{{ comment.user }}</b>
+            </p>
+            <hr>
+        {% endif %}
+    {% endfor%}
+
+{% endblock%}

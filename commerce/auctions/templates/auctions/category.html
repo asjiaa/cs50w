@@ -1,23 +1,28 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Active Listings</h2>
+    {% if category in categories %}
+        <h2>{{ category }} Listings</h2>
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            {{ category }} category does not exist
+        </div>
+    {% endif %}
 
-    <!-- Specification 3 - Active Listings Page -->
+    <!-- Specification 6 - Individual Category -->
     {% for listing in listings %}
-        {% if listing.active %}
+        {% if category == listing.category and listing.active %}
             <hr>
             <div class="row align-items-center mb-4">
                 <div class="col-md-4">
                     <img src="{{ listing.image }}" alt="No Image" width="250" class="img-fluid rounded">
                 </div>
-                <div class="col-md-8">
+                <div>
                     <h4>
                         <a href="{% url 'listing' id=listing.id %}" class="text-decoration-none">
                             {{ listing.title }}
                         </a>
                     </h4>
-                    <p>{{ listing.description }}</p>
                     <h6>Price: ${{ listing.price.amount }}</h6>
                     <p class="text-muted">
                         Created <b>{{ listing.created }}</b> by <b>{{ listing.lister }}</b>
@@ -25,6 +30,6 @@
                 </div>
             </div>
         {% endif %}
-    {% endfor %}
+    {% endfor%}
 
 {% endblock %}

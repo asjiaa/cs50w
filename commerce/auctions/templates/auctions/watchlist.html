@@ -1,0 +1,27 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Watchlist</h2>
+
+    <!-- Specification 7 - Watchlist -->
+    {% for listing in list %}
+        <hr>
+        <div class="row align-items-center mb-4">
+            <div class="col-md-4">
+                <img src="{{ listing.image }}" alt="No Image" width="250" class="img-fluid rounded">
+            </div>
+            <div>
+                <h4>
+                    <a href="{% url 'listing' id=listing.id %}" class="text-decoration-none">
+                        {{ listing.title }}
+                    </a>
+                </h4>
+                <h6>Price: ${{ listing.price.amount }}</h6>
+                <p class="text-muted">
+                    Created <b>{{ listing.created }}</b> by <b>{{ listing.lister }}</b>
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
