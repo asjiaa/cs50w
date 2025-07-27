@@ -34,6 +34,7 @@ function load_mailbox(mailbox) {
   // Show the mailbox name
   document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
 
+  // Specification 2 - Mailbox
   fetch(`/emails/${mailbox}`)
   .then(response => response.json())
   .then(emails => {
@@ -54,6 +55,7 @@ function load_mailbox(mailbox) {
   });
 }
 
+// Specification 1 - Send Mail
 function send_email(event) {
 
   event.preventDefault();
@@ -76,6 +78,7 @@ function send_email(event) {
   });
 }
 
+// Specification 3 - View Email
 function view_email(id, mailbox) {
 
   document.querySelector('#emails-view').style.display = 'none';
@@ -126,6 +129,7 @@ function view_email(id, mailbox) {
   );
 }
 
+// Specification 4 - Archive, Unarchive
 function archive_email(id) {
   fetch(`/emails/${id}`)
     .then(response => response.json())
@@ -143,6 +147,7 @@ function archive_email(id) {
   );
 }
 
+// Specification 5 - Reply
 function reply_email(id) {
   fetch(`/emails/${id}`)
     .then(response => response.json())
