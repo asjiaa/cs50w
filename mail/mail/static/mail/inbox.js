@@ -38,7 +38,6 @@ function load_mailbox(mailbox) {
   fetch(`/emails/${mailbox}`)
   .then(response => response.json())
   .then(emails => {
-    console.log(emails);
     for (let i = 0; i < emails.length; i++) {
       const email = document.createElement('div');
       email.className = `view border border-dark p-2 ${emails[i].read ? 'bg-light' : 'bg-white'}`;
@@ -69,7 +68,6 @@ function send_email(event) {
   })
   .then(response => response.json())
   .then(result => {
-    // console.log(result);
     if (result.error) {
       alert(result.error);
     } else {
@@ -98,7 +96,6 @@ function view_email(id, mailbox) {
           })
         });
       }
-      // console.log(email)
       const view = document.createElement('div');
 
       view.innerHTML = `
