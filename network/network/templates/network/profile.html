@@ -2,15 +2,22 @@
 {% load static %}
 
 {% block body %}
-    <h2>All Posts</h2>
+    <h2>{{ owner.username }}</h2>
 
-    {% if user.is_authenticated %}
-        <div class="border rounded" id="compose-view">
-            <h4>New Post</h4>
-            <form id="compose-form" action="{% url 'compose' %}" method="post">
+    <div>
+        <span><b>{{ owner.following.count }}</b> Following</span>
+        <span><b>{{ owner.followers.count }}</b> Followers</span>
+    </div>
+
+    {% if user.is_authenticated and request.user != owner %}
+        <div>
+            <form action="{% url 'follow' id=owner.id %}" method="post">
                 {% csrf_token %}
-                <div id="compose-content">{{ form.content }}</div>
-                <input type="submit" class="btn btn-primary mt-1" value="Post"/>
+                {% if request.user not in owner.followers.all %}
+                    <button class="btn btn-primary m-2">Follow</button>
+                {% else %}
+                    <button class="btn btn-outline-primary m-2">Unfollow</button>
+                {% endif %}
             </form>
         </div>
     {% endif %}
@@ -83,7 +90,7 @@
             </li>
         </ul>
     </nav>
-
+    
 {% endblock %}
 
 {% block script %}

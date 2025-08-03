@@ -1,0 +1,11 @@
+i {
+    cursor: pointer;
+}
+
+.body {
+    padding: 10px;
+}
+
+#compose-view {
+    padding: 20px;
+}
