@@ -1,0 +1,63 @@
+{% extends "sentiment/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <div class="body">
+        <h1><img src="{% static 'sentiment/images/nyt.svg' %}" alt="NYT"> Opinion Sentiment</h1>
+        <h6>View a breakdown of New York Times opinion columnists' sentiments on current events</h6>
+
+        <form id="search-form" method="post">
+            {% csrf_token %}
+            <div class="search-input-container">
+                <div class="position-relative">
+                    {{ form.query }}
+                </div>
+                <ul id="search-log"></ul>
+            </div>
+            <div class="row mb-4">
+                <div class="col-12 align-items-start">
+                    <label class="group-label">Top Stories</label>
+                    <ul class="search-list">
+                        {% for topic in topics %}
+                            <li>
+                                <button type="button" class="fill-search">{{ topic }}</button>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-6 mb-3">
+                    <div class="date-group">
+                        <label class="group-label">{{ form.start_year.label }}</label>
+                        <div class="date-inputs">
+                            {{ form.start_year }}
+                            {{ form.start_month }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="date-group">
+                        <label class="group-label">{{ form.end_year.label }}</label>
+                        <div class="date-inputs">
+                            {{ form.end_year }}
+                            {{ form.end_month }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" id="search-topic" class="search-btn">Search</button>
+            </div>
+        </form>
+
+        <div id="sentiment-chart"></div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="{% static 'sentiment/sentiment.js' %}"></script>
+{% endblock %}
