@@ -2,7 +2,7 @@
 
 ## Specification
 
-A sentiment analysis and visualizer tool for [New York Times (NYT) Opinion](https://www.nytimes.com/section/opinion) Opinion articles from [NYT APIs](https://developer.nytimes.com/apis). Built with Django on the back-end and JavaScript on the front-end.
+A sentiment analysis and visualizer tool for [New York Times (NYT) Opinion](https://www.nytimes.com/section/opinion) articles from [NYT APIs](https://developer.nytimes.com/apis). Built with Django on the back-end and JavaScript on the front-end.
 
 Article fetching is supported with the [```pynytimes```](https://pynytimes.michadenheijer.com/) library. 
 
