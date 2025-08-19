@@ -7,3 +7,4 @@
 | [**2**](./commerce) [Commerce](https://cs50.harvard.edu/web/2020/projects/2/commerce/) | Week 4 [SQL, Models & Migrations](https://cs50.harvard.edu/web/2020/weeks/4/) |
 | [**3**](./mail) [Mail](https://cs50.harvard.edu/web/2020/projects/3/mail/) | Week 5 [JavaScript](https://cs50.harvard.edu/web/2020/weeks/5/), Week 6 [User Interfaces](https://cs50.harvard.edu/web/2020/weeks/6/) |
 | [**4**](./network) [Network](https://cs50.harvard.edu/web/2020/projects/4/network/) | Week 7 [Testing, CI/CD](https://cs50.harvard.edu/web/2020/weeks/7/) |
+| [**5**](./capstone) [Capstone](https://cs50.harvard.edu/web/2020/projects/final/capstone/) | Week 8 [Scalability, Security](https://cs50.harvard.edu/web/2020/weeks/8/) |
